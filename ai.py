@@ -67,11 +67,11 @@ def bot():
     #draw_grid(grid, width=3, path=reconstruct_path(came_from, start=(x,y), goal=(11, 10)))
 
     print(player.Position)
-    pi = Point(x,y)
+    pi = player.Position
     pg = Point(11,10)
-    path = createPath(grid,pi,pg)
-    for lava in lavas:
-        print(lava.X, lava.Y)
+    if not path:
+        path = createPath(grid,pi,pg)
+
     print(path)
     return moveToLocation(path) 
 
