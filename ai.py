@@ -4,7 +4,7 @@ import json
 import numpy as np
 
 from utilsD import *
-from astar.implementation import *
+from implementation import *
 from resources import *
 
 
@@ -31,15 +31,17 @@ def deserialize_map(serialized_map):
 
     return deserialized_map
 
+grid = GridWithWeights(40,40)
+grid.weights = fillWeights()
 
+path = []
 
 def bot():
     """
     Main de votre bot.
     """
-    grid = GridWithWeights(40,40)
-    grid.weights = fillWeights()
-
+    global grid
+    global path
 
     map_json = request.form["map"]
 
@@ -82,21 +84,20 @@ def bot():
     #######################
 
 
-    came_from, cost_so_far = a_star_search(grid, (x,y),(11,10))
 
-    #draw_grid(grid,width=3, point_to=came_from, start=(x,y),goal=(11,10))
-    print()
-    draw_grid(grid,width=3, number=cost_so_far, start=(x,y),goal=(11,10))
-    print()
-    draw_grid(grid, width=3, path=reconstruct_path(came_from, start=(x,y), goal=(11, 10)))
- 
-   # print(otherPlayers[0]["Value"].Position)
+    #print()
+    #draw_grid(grid,width=3, number=cost_so_far, start=(x,y),goal=(11,10))
+    #print()
+    #draw_grid(grid, width=3, path=reconstruct_path(came_from, start=(x,y), goal=(11, 10)))
+
     print(pos)
-    print(findThings(deserialized_map, TileContent.Lava))
+    pi = Point(x,y)
+    pg = Point(11,10)
+    print(createPath(grid,pi,pg))
     input()
 
     return create_move_action(Point(x-1, y))
-
+    #print(otherPlayers[0]["Value"].Position)
 @app.route("/", methods=["POST"])
 def reponse():
     """
