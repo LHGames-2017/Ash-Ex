@@ -5,6 +5,7 @@ import numpy as np
 
 from findX import *
 from astar.implementation import *
+from resources import *
 
 
 app = Flask(__name__)
