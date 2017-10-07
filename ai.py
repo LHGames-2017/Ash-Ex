@@ -55,7 +55,7 @@ def bot():
         otherPlayers.append(player_info)
 
     #########  TESTING  ########
-    obstacles = findThings(deserialized_map, [x for x in range(1,6)])
+    obstacles = findThings(deserialized_map, [x for x in range(1,6)]+[None])
     grid.walls = obstaclesToWalls(obstacles)
 
     #######################
@@ -73,6 +73,7 @@ def bot():
 
 
     print(path)
+    print("1527", deserialized_map[15][27].Content)
     return moveToLocation(path) 
 
     input()
