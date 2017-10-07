@@ -37,7 +37,8 @@ def bot():
     """
     Main de votre bot.
     """
-    grid = SquareGrid(40,40)
+    grid = GridWithWeights(40,40)
+    grid.weights = fillWeights()
 
 
     map_json = request.form["map"]
@@ -77,22 +78,21 @@ def bot():
     lavas = findThings(deserialized_map, TileContent.Lava)
     walls = findThings(deserialized_map, TileContent.Wall)
     grid.walls = obstaclesToWalls(lavas, walls, otherPlayers)
+
     #######################
 
 
     #came_from, cost_so_far = a_star_search(grid, (x,y),(11,10))
 
-    draw_grid(grid)
+    #draw_grid(grid,width=3, point_to=came_from, start=(x,y),goal=(11,10))
+    print()
+    draw_grid(grid,width=3, number=cost_so_far, start=(x,y),goal=(11,10))
+    print()
+    draw_grid(grid, width=3, path=reconstruct_path(came_from, start=(x,y), goal=(11, 10)))
+ 
    # print(otherPlayers[0]["Value"].Position)
     print(pos)
-    lol = findThings(deserialized_map, TileContent.Player)
-    for player in lol:
-        print(player.X, player.Y)
-
-    for player in otherPlayers:
-        print(player.Position)
-
-    return create_move_action(Point(x+1, y))
+    return create_move_action(Point(x, y))
     print(findThings(deserialized_map, TileContent.Lava))
     input()
 
