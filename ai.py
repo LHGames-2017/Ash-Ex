@@ -1,5 +1,6 @@
 from flask import Flask, request
 from structs import *
+import astar.implementation
 import json
 import numpy
 
