@@ -3,7 +3,8 @@ from structs import *
 import json
 import numpy as np
 
-from findX import findThings
+from findX import *
+from astar.implementation import *
 
 
 app = Flask(__name__)
@@ -52,6 +53,8 @@ def deserialize_map(serialized_map):
     return deserialized_map
 
 
+grid = SquareGrid(40,40)
+updateGrid = True
 
 def bot():
     """
@@ -76,6 +79,16 @@ def bot():
     serialized_map = map_json["CustomSerializedMap"]
     deserialized_map = deserialize_map(serialized_map)
 
+    #########    ########
+    if(updateGrid):
+        lavas = findThings(deserialized_map, TileContent.Lava)
+        walls = findThings(deserialized_map, TileContent.Wall)
+        grid.walls = tilesToWalls(lavas, walls)
+        
+        
+
+    #######################
+
     otherPlayers = []
 
     for player_dict in map_json["OtherPlayers"]:
@@ -90,13 +103,10 @@ def bot():
 
             otherPlayers.append({player_name: player_info })
     # return decision
-    lol = findThings(deserialized_map, TileContent.House)
-    for xd in lol:
-        print(xd.X, xd.Y)
-    print(pos)
+    print(findThings(deserialized_map, TileContent.Lava))
     input()
 
-    return create_move_action(Point(x, y))
+    return create_move_action(Point(x-1, y))
 
 @app.route("/", methods=["POST"])
 def reponse():
