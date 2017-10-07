@@ -10,6 +10,7 @@ def createPath(grid, start, goal):
 
 	return path
 
+
 def moveToLocation(oldPos, newPos):
 	pass
 	#path = createPath(oldPos, newPos)
@@ -17,17 +18,17 @@ def moveToLocation(oldPos, newPos):
 	#	create_move_action(position)
 
 def isFull(player):
-	if player.CarriedRessources < player.CarryingCapacity:
-		return False
-	return True
+	return (player.CarriedRessources == player.CarryingCapacity)
 
 def returnHome(player):
 	moveToLocation(player.Position, player.HouseLocation)
 
+def isSomeoneCloseToHome():
+	pass
+
 def gatherResources(player):
 	if isFull(player):
 		returnHome(player)
-		gatherResources(player)
 	else:
 		pass
 		### TODO: code it

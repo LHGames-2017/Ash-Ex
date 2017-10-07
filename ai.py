@@ -79,7 +79,7 @@ def bot():
     #########  TESTING  ########
     lavas = findThings(deserialized_map, TileContent.Lava)
     walls = findThings(deserialized_map, TileContent.Wall)
-    grid.walls = obstaclesToWalls(lavas, walls)
+    grid.walls = obstaclesToWalls(lavas, walls, otherPlayers)
 
     #######################
 
@@ -96,8 +96,9 @@ def bot():
     print(createPath(grid,pi,pg))
     input()
 
-    return create_move_action(Point(x-1, y))
-    #print(otherPlayers[0]["Value"].Position)
+    return create_move_action(Point(x, y))
+
+
 @app.route("/", methods=["POST"])
 def reponse():
     """
