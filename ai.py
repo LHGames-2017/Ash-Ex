@@ -82,6 +82,8 @@ def bot():
     #######################
 
 
+    came_from, cost_so_far = a_star_search(grid, (x,y),(11,10))
+
     draw_grid(grid)
    # print(otherPlayers[0]["Value"].Position)
     print(pos)
