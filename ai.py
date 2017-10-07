@@ -3,7 +3,7 @@ from structs import *
 import json
 import numpy as np
 
-from findX import *
+from utilsD import *
 from astar.implementation import *
 from resources import *
 
@@ -32,13 +32,14 @@ def deserialize_map(serialized_map):
     return deserialized_map
 
 
-grid = SquareGrid(40,40)
-updateGrid = True
 
 def bot():
     """
     Main de votre bot.
     """
+    grid = SquareGrid(40,40)
+
+
     map_json = request.form["map"]
 
     # Player info
@@ -59,16 +60,6 @@ def bot():
     serialized_map = map_json["CustomSerializedMap"]
     deserialized_map = deserialize_map(serialized_map)
 
-    #########    ########
-    if(updateGrid):
-        lavas = findThings(deserialized_map, TileContent.Lava)
-        walls = findThings(deserialized_map, TileContent.Wall)
-        grid.walls = tilesToWalls(lavas, walls)
-        
-        
-
-    #######################
-
     otherPlayers = []
 
     for players in map_json["OtherPlayers"]:
@@ -81,6 +72,19 @@ def bot():
         otherPlayers.append(player_info)
 
     # return decision
+
+    #########  TESTING  ########
+    lavas = findThings(deserialized_map, TileContent.Lava)
+    walls = findThings(deserialized_map, TileContent.Wall)
+    grid.walls = obstaclesToWalls(lavas, walls, otherPlayers)
+
+    #######################
+
+
+    draw_grid(grid)
+   # print(otherPlayers[0]["Value"].Position)
+    print(pos)
+    return create_move_action(Point(x, y))
     print(findThings(deserialized_map, TileContent.Lava))
     input()
 
