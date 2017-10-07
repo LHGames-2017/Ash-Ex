@@ -30,7 +30,7 @@ def bot():
     encoded_map = map_json.encode()
     map_json = json.loads(encoded_map)
     p = map_json["Player"]
-    print("player:{}".format(p))
+    #print("player:{}".format(p))
     pos = p["Position"]
     x = pos["X"]
     y = pos["Y"]
@@ -54,8 +54,6 @@ def bot():
 
         otherPlayers.append(player_info)
 
-    # return decision
-
     #########  TESTING  ########
     lavas = findThings(deserialized_map, TileContent.Lava)
     walls = findThings(deserialized_map, TileContent.Wall)
@@ -63,21 +61,21 @@ def bot():
 
     #######################
 
-
-
     #print()
     #draw_grid(grid,width=3, number=cost_so_far, start=(x,y),goal=(11,10))
     #print()
     #draw_grid(grid, width=3, path=reconstruct_path(came_from, start=(x,y), goal=(11, 10)))
 
-    print(pos)
+    print(player.Position)
     pi = Point(x,y)
     pg = Point(11,10)
-    print(createPath(grid,pi,pg))
+    path = createPath(grid,pi,pg)
+    for lava in lavas:
+        print(lava.X, lava.Y)
+    print(path)
+    return moveToLocation(path) 
+
     input()
-
-    return create_move_action(Point(x, y))
-
 
 @app.route("/", methods=["POST"])
 def reponse():
