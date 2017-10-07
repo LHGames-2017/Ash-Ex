@@ -11,14 +11,18 @@ def findThings(dMap, content):
     return tilesFound
 
 
-def obstaclesToWalls(lavas, walls, otherPlayers):
+def obstaclesToWalls(lavas, walls):
     tilesFound = walls + lavas
     wallA = []
     for obstacle in tilesFound:
         wallA.append((obstacle.X, obstacle.Y))
 
-    for player in otherPlayers:
-        pos = player.Position
-        wallA.append((pos.X,pos.Y))
-    
     return wallA
+
+def fillWeights():
+    weights = {}
+    for y in range(40):
+        for x in range(40):
+            weights[(x,y)] = 1
+
+    return weights
