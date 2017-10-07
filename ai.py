@@ -66,7 +66,7 @@ def bot():
 
     print(player.Position)
     pi = player.Position
-    pg = Point(11,10)
+    pg = Point(11,11)
     if not path:
         path = createPath(grid,pi,pg)
     #draw_grid(grid, width=3, path=reconstruct_path(path, start=(x,y), goal=(11, 10)))

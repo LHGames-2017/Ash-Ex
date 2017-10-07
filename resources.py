@@ -22,11 +22,3 @@ def isFull(player):
 
 def isSomeoneCloseToHome():
 	pass
-
-def gatherResources(player):
-	if isFull(player):
-		returnHome(player)
-	else:
-		pass
-		### TODO: code it
-		
