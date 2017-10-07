@@ -1,3 +1,4 @@
+from structs import *
 
 def leveledUp(oldMaxHealth, newMaxHealth):
 	if oldMaxHealth != newMaxHealth:
@@ -12,7 +13,6 @@ def findClosetObject(position, objects):
 			currentDistance = newDistance
 			newPosition = obj
 	return newPosition
-
 
 def playerHouse(playerInfo, houses):
 	if playerInfo.house == None and playerInfo.oldHealth != None:
