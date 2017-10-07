@@ -5,31 +5,10 @@ import numpy as np
 
 from utilsD import *
 from astar.implementation import *
+from resources import *
 
 
 app = Flask(__name__)
-
-def create_action(action_type, target):
-    actionContent = ActionContent(action_type, target.__dict__)
-    return json.dumps(actionContent.__dict__)
-
-def create_move_action(target):
-    return create_action("MoveAction", target)
-
-def create_attack_action(target):
-    return create_action("AttackAction", target)
-
-def create_collect_action(target):
-    return create_action("CollectAction", target)
-
-def create_steal_action(target):
-    return create_action("StealAction", target)
-
-def create_heal_action():
-    return create_action("HealAction", "")
-
-def create_purchase_action(item):
-    return create_action("PurchaseAction", item)
 
 def deserialize_map(serialized_map):
     """
@@ -104,10 +83,13 @@ def bot():
 
 
     draw_grid(grid)
-    input()
    # print(otherPlayers[0]["Value"].Position)
     print(pos)
     return create_move_action(Point(x, y))
+    print(findThings(deserialized_map, TileContent.Lava))
+    input()
+
+    return create_move_action(Point(x-1, y))
 
 @app.route("/", methods=["POST"])
 def reponse():
