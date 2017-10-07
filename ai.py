@@ -90,10 +90,13 @@ def bot():
 
             otherPlayers.append({player_name: player_info })
     # return decision
-    print(findThings(deserialized_map, TileContent.Lava))
+    lol = findThings(deserialized_map, TileContent.House)
+    for xd in lol:
+        print(xd.X, xd.Y)
+    print(pos)
     input()
 
-    return create_move_action(Point(x-1, y))
+    return create_move_action(Point(x, y))
 
 @app.route("/", methods=["POST"])
 def reponse():

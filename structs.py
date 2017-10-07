@@ -72,10 +72,12 @@ class Player(object):
 
 class PlayerInfo(object):
 
-    def __init__(self, health, maxHealth, position):
+    def __init__(self, health, maxHealth, position, oldHealth = None, house = None):
         self.Health = health
         self.MaxHealth = maxHealth
         self.Position = position
+        self.OldHealth = oldHealth
+        self.House = house
 
 class ActionContent(object):
 
