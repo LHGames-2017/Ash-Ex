@@ -55,14 +55,14 @@ def bot():
         otherPlayers.append(player_info)
 
     #########  TESTING  ########
-    obstacles = findThings(deserialized_map, [x for x in range(1,6)])
+    obstacles = findThings(deserialized_map, [x for x in range(1,6)]+[None])
     grid.walls = obstaclesToWalls(obstacles)
 
     #######################
 
     #print()
     #draw_grid(grid,width=3, number=cost_so_far, start=(x,y),goal=(11,10))
-    #print()
+    #print(
 
     print(player.Position)
     pi = player.Position
