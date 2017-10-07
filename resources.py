@@ -13,15 +13,12 @@ def createPath(grid, start, goal):
 def convertTuplePoint(tuple):
 	return Point(tuple[0], tuple[1])
 
-def moveToLocation(path):
+def followPath(path):
 	pos = convertTuplePoint(path.pop())
 	return create_move_action(pos)
 
 def isFull(player):
 	return (player.CarriedRessources == player.CarryingCapacity)
-
-def returnHome(player):
-	pass
 
 def isSomeoneCloseToHome():
 	pass
