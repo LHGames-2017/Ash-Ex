@@ -77,20 +77,25 @@ def bot():
     lavas = findThings(deserialized_map, TileContent.Lava)
     walls = findThings(deserialized_map, TileContent.Wall)
     grid.walls = obstaclesToWalls(lavas, walls, otherPlayers)
-
     #######################
 
 
-    came_from, cost_so_far = a_star_search(grid, (x,y),(11,10))
+    #came_from, cost_so_far = a_star_search(grid, (x,y),(11,10))
 
     draw_grid(grid)
    # print(otherPlayers[0]["Value"].Position)
     print(pos)
-    return create_move_action(Point(x, y))
+    lol = findThings(deserialized_map, TileContent.Player)
+    for player in lol:
+        print(player.X, player.Y)
+
+    for player in otherPlayers:
+        print(player.Position)
+
+    return create_move_action(Point(x+1, y))
     print(findThings(deserialized_map, TileContent.Lava))
     input()
 
-    return create_move_action(Point(x-1, y))
 
 @app.route("/", methods=["POST"])
 def reponse():
