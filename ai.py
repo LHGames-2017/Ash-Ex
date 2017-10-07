@@ -55,22 +55,22 @@ def bot():
         otherPlayers.append(player_info)
 
     #########  TESTING  ########
-    lavas = findThings(deserialized_map, TileContent.Lava)
-    walls = findThings(deserialized_map, TileContent.Wall)
-    grid.walls = obstaclesToWalls(lavas, walls)
+    obstacles = findThings(deserialized_map, [x for x in range(1,6)])
+    grid.walls = obstaclesToWalls(obstacles)
 
     #######################
 
     #print()
     #draw_grid(grid,width=3, number=cost_so_far, start=(x,y),goal=(11,10))
     #print()
-    #draw_grid(grid, width=3, path=reconstruct_path(came_from, start=(x,y), goal=(11, 10)))
 
     print(player.Position)
     pi = player.Position
     pg = Point(11,10)
     if not path:
         path = createPath(grid,pi,pg)
+    #draw_grid(grid, width=3, path=reconstruct_path(path, start=(x,y), goal=(11, 10)))
+
 
     print(path)
     return followPath(path) 

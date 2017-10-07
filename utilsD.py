@@ -5,16 +5,15 @@ def findThings(dMap, content):
     tilesFound = []
     for tiles in dMap:
         for tile in tiles:  
-            if tile.Content == content: 
+            if tile.Content in content: 
                 tilesFound.append(tile)
 
     return tilesFound
 
 
-def obstaclesToWalls(lavas, walls):
-    tilesFound = walls + lavas
+def obstaclesToWalls(obstacles):
     wallA = []
-    for obstacle in tilesFound:
+    for obstacle in obstacles:
         wallA.append((obstacle.X, obstacle.Y))
 
     return wallA
