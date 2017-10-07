@@ -3,7 +3,7 @@ from structs import *
 import json
 import numpy as np
 
-from findX import *
+from utilsD import *
 from astar.implementation import *
 
 
@@ -53,13 +53,14 @@ def deserialize_map(serialized_map):
     return deserialized_map
 
 
-grid = SquareGrid(40,40)
-updateGrid = True
 
 def bot():
     """
     Main de votre bot.
     """
+    grid = SquareGrid(40,40)
+
+
     map_json = request.form["map"]
 
     # Player info
@@ -79,16 +80,6 @@ def bot():
     serialized_map = map_json["CustomSerializedMap"]
     deserialized_map = deserialize_map(serialized_map)
 
-    #########    ########
-    if(updateGrid):
-        lavas = findThings(deserialized_map, TileContent.Lava)
-        walls = findThings(deserialized_map, TileContent.Wall)
-        grid.walls = tilesToWalls(lavas, walls)
-        
-        
-
-    #######################
-
     otherPlayers = []
 
     for player_dict in map_json["OtherPlayers"]:
@@ -103,7 +94,20 @@ def bot():
 
             otherPlayers.append({player_name: player_info })
     # return decision
-    return create_move_action(Point(x-1, y))
+
+    #########  TESTING  ########
+    lavas = findThings(deserialized_map, TileContent.Lava)
+    walls = findThings(deserialized_map, TileContent.Wall)
+    grid.walls = obstaclesToWalls(lavas, walls, otherPlayers)
+
+    #######################
+
+
+    draw_grid(grid)
+    input()
+   # print(otherPlayers[0]["Value"].Position)
+    print(pos)
+    return create_move_action(Point(x, y))
 
 @app.route("/", methods=["POST"])
 def reponse():
