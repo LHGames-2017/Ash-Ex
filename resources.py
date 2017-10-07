@@ -7,6 +7,7 @@ def createPath(grid, start, goal):
 	goalT  = (goal.X,goal.Y)
 	came_from, cost_so_far = a_star_search(grid, startT, goalT)
 	path = list(reversed(reconstruct_path(came_from,start=startT,goal=goalT)))[:-2]
+	#draw_grid(grid, width=3, path=path)
 
 	return path
 

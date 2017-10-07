@@ -6,6 +6,7 @@ import numpy as np
 from utilsD import *
 from implementation import *
 from resources import *
+from track import *
 
 
 app = Flask(__name__)
@@ -13,7 +14,7 @@ app = Flask(__name__)
 
 grid = GridWithWeights(40,40)
 grid.weights = fillWeights()
-
+pastPosition = Point(0,0)
 path = []
 
 def bot():
@@ -22,6 +23,7 @@ def bot():
     """
     global grid
     global path
+    global pastPosition
 
     map_json = request.form["map"]
 
@@ -55,7 +57,7 @@ def bot():
         otherPlayers.append(player_info)
 
     #########  TESTING  ########
-    obstacles = findThings(deserialized_map, [x for x in range(1,6)]+[None])
+    obstacles = findThings(deserialized_map, [x for x in range(1,6)])
     grid.walls = obstaclesToWalls(obstacles)
 
     #######################
@@ -63,14 +65,17 @@ def bot():
     #print()
     #draw_grid(grid,width=3, number=cost_so_far, start=(x,y),goal=(11,10))
     #print(
-
+    resources = findThings(deserialized_map, [TileContent.Resource])
     print(player.Position)
+    for lul in otherPlayers:
+        print(lul.Position)
     pi = player.Position
-    pg = Point(11,11)
-    if not path:
+    pg = findClosetObject(player.Position, resources)
+    if (not path) or (pastPosition.X == player.Position.X and pastPosition.Y == player.Position.Y):
         path = createPath(grid,pi,pg)
-    #draw_grid(grid, width=3, path=reconstruct_path(path, start=(x,y), goal=(11, 10)))
 
+    pastPosition = player.Position
+    #draw_grid(grid, width=u3, path=reconstruct_path(path, start=(x,y), goal=(11, 10)))
 
     print(path)
     return followPath(path) 
