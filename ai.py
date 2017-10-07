@@ -79,17 +79,16 @@ def bot():
         for player_name in player_dict.keys():
             player_info = player_dict[player_name]
             if player_info == 'notAPlayer':
-                pass
+                continue
             p_pos = player_info["Position"]
             player_info = PlayerInfo(player_info["Health"],
-                                    player_info["MaxHealth"],
+                                   player_info["MaxHealth"],
                                      Point(p_pos["X"], p_pos["Y"]))
 
             otherPlayers.append({player_name: player_info })
-
     # return decision
     print(pos)
-    input()
+
     return create_move_action(Point(x-1, y))
 
 @app.route("/", methods=["POST"])
