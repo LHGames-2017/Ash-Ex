@@ -59,7 +59,7 @@ def bot():
     #########  TESTING  ########
     lavas = findThings(deserialized_map, TileContent.Lava)
     walls = findThings(deserialized_map, TileContent.Wall)
-    grid.walls = obstaclesToWalls(lavas, walls, otherPlayers)
+    grid.walls = obstaclesToWalls(lavas, walls)
 
     #######################
 
