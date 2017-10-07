@@ -3,6 +3,9 @@ from structs import *
 import json
 import numpy as np
 
+from findX import findThings
+
+
 app = Flask(__name__)
 
 def create_action(action_type, target):
@@ -87,7 +90,8 @@ def bot():
 
             otherPlayers.append({player_name: player_info })
     # return decision
-    print(pos)
+    print(findThings(deserialized_map, TileContent.Lava))
+    input()
 
     return create_move_action(Point(x-1, y))
 
