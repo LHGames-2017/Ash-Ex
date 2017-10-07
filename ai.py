@@ -73,7 +73,7 @@ def bot():
         path = createPath(grid,pi,pg)
 
     print(path)
-    return moveToLocation(path) 
+    return followPath(path) 
 
     input()
 
